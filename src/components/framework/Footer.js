@@ -94,7 +94,6 @@ export default function Header() {
           <Copyright />
         </Box>
       </Container>
-      {/* End footer */}
     </React.Fragment>
   );
 }

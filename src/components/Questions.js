@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ConnectApi from "../api/ConnectApi";
 import Header from "./framework/Header";
@@ -31,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
     color: "blue",
   },
   alert: {
-    marginTop: "10px"
-  }
+    marginTop: "10px",
+  },
 }));
 
 const Questions = () => {
@@ -40,12 +40,10 @@ const Questions = () => {
   const answer = useState({});
   const [answerCheck, setAnswerCheck] = useState();
   const { category, title } = useParams();
-  const [pageNumber, setPageNumber] = useState(1)
-  const [correctAnswers, setCorrectAnswers] = useState(0)
-  console.log(correctAnswers)
+  const [pageNumber, setPageNumber] = useState(1);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
 
   const API_URL = "https://dj-proj-quizapp-backend.herokuapp.com/quiz/" + category + "/" + title + "?page=" + pageNumber;
-  console.log(API_URL)
   const [dataState] = ConnectApi(API_URL, pageNumber);
 
   let a, b;
@@ -55,7 +53,7 @@ const Questions = () => {
   }
 
   const handleSelection = (e) => {
-    answer[0][e.target.value] = e.target.checked 
+    answer[0][e.target.value] = e.target.checked;
   };
 
   useEffect(() => {
@@ -64,8 +62,9 @@ const Questions = () => {
     for (var x = 0; x < a?.length; x++) {
       object[z[x]] = false;
     }
-    answer[0] = object
+    answer[0] = object;
   });
+
   const checkAnswer = (e) => {
     e.preventDefault();
     let n;
@@ -77,7 +76,7 @@ const Questions = () => {
     let o = Object.values(y);
     let p = Object.values(answer[0]);
     if (arrayEquals(o, p)) {
-      setCorrectAnswers(correctAnswers + 1)
+      setCorrectAnswers(correctAnswers + 1);
       setAnswerCheck(true);
     } else {
       setAnswerCheck(false);
@@ -85,18 +84,18 @@ const Questions = () => {
   };
 
   function refreshPage(e) {
-    e.preventDefault()
-    setAnswerCheck()
-    setPageNumber(pageNumber + 1)
+    e.preventDefault();
+    setAnswerCheck();
+    setPageNumber(pageNumber + 1);
   }
 
   function Result() {
     if (answerCheck === true && pageNumber < dataState.data.count) {
       return (
-        <Alert variant= "filled" severity="success">
+        <Alert variant="filled" severity="success">
           <AlertTitle>Correct Answer</AlertTitle>
           Well done you got it right —{" "}
-          <Link href= "" variant="body2" onClick={refreshPage}>
+          <Link href="" variant="body2" onClick={refreshPage}>
             {"Next Question"}
           </Link>
         </Alert>
@@ -104,22 +103,31 @@ const Questions = () => {
     } else if (answerCheck === true && pageNumber === dataState.data.count) {
       return (
         <>
-        <Alert variant= "filled" severity="success">
-          <AlertTitle>Correct Answer</AlertTitle>
-          Well done you got it right
-        </Alert>
-        <Alert variant= "filled" severity="info" className={classes.alert}>
-        <AlertTitle>The Quiz is over<br/>
-        <code>Your score is ➡ <b>{correctAnswers} / {dataState.data.count} ({(correctAnswers/dataState.data.count*100).toFixed()}% success)</b></code>
-        </AlertTitle>
-      </Alert>
-      </>
+          <Alert variant="filled" severity="success">
+            <AlertTitle>Correct Answer</AlertTitle>
+            Well done you got it right
+          </Alert>
+          <Alert variant="filled" severity="info" className={classes.alert}>
+            <AlertTitle>
+              ✍ The Quiz is over 🚨
+              <br />
+              <code>
+                🚀 Your score is ➡{" "}
+                <b>
+                  {correctAnswers} / {dataState.data.count}
+                  <br />
+                  <center>({((correctAnswers / dataState.data.count) * 100).toFixed()}% success)</center>
+                </b>
+              </code>
+            </AlertTitle>
+          </Alert>
+        </>
       );
     } else if (answerCheck === false && pageNumber < dataState.data.count) {
       return (
-        <Alert variant= "filled" severity="error">
+        <Alert variant="filled" severity="error">
           <AlertTitle>Wrong Answer</AlertTitle>
-          <Link href= "" variant="body2" onClick={refreshPage}>
+          <Link href="" variant="body2" onClick={refreshPage}>
             {"Next Question"}
           </Link>
         </Alert>
@@ -127,19 +135,27 @@ const Questions = () => {
     } else if (answerCheck === false && pageNumber === dataState.data.count) {
       return (
         <>
-        <Alert variant= "filled" severity="error">
-          <AlertTitle>Wrong Answer</AlertTitle><br/>
-        </Alert>
-        <Alert variant= "filled" severity="info" className={classes.alert}>
-        <AlertTitle>The Quiz is over<br/>
-        <code>Your score is ➡ <b>{correctAnswers} / {dataState.data.count} ({(correctAnswers/dataState.data.count*100).toFixed()}% success)</b></code>
-        </AlertTitle>
-      </Alert>
-      </>
+          <Alert variant="filled" severity="error">
+            <AlertTitle>Wrong Answer</AlertTitle>
+            <br />
+          </Alert>
+          <Alert variant="filled" severity="info" className={classes.alert}>
+            <AlertTitle>
+              ✍ The Quiz is over 🚨
+              <br />
+              <code>
+                🚀 Your score is ➡{" "}
+                <b>
+                  {correctAnswers} / {dataState.data.count}
+                  <br />
+                  <center>({((correctAnswers / dataState.data.count) * 100).toFixed()}% success)</center>
+                </b>
+              </code>
+            </AlertTitle>
+          </Alert>
+        </>
       );
-    }
-    
-    else {
+    } else {
       return <React.Fragment></React.Fragment>;
     }
   }

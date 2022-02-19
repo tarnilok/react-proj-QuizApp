@@ -26,9 +26,9 @@ const Header = () => {
       <AppBar position="static" color="default" elevation={0}>
           <Toolbar>
               <Typography variant='h4' color='inherit'  className={classes.toolbarTitle}>
-              <Button onClick={() => history.push('/')}><i class="fas fa-home" style={{color:'#624987', fontSize:'33px', marginBottom:'7px', marginRight:'20px'}}></i></Button>
-              <a href="https://github.com/tarnilok/dj-proj-QuizApp" target="_blank" title="Backend Codes" ><i class="fab fa-github"></i></a>
-              <a href="https://dj-proj-quizapp-backend.herokuapp.com/" target="_blank" rel="noreferrer" title="Backend Side" ><img src='https://pbs.twimg.com/profile_images/700084762799550464/dbPz0Wiw_400x400.png' className={classes.icons}></img></a>
+              <Button onClick={() => history.push('/')}><i className="fas fa-home" style={{color:'#624987', fontSize:'33px', marginBottom:'7px', marginRight:'20px'}}></i></Button>
+              <a href="https://github.com/tarnilok/dj-proj-QuizApp" target="_blank" rel="noreferrer" title="Backend Codes" ><i className="fab fa-github"></i></a>
+              <a href="https://dj-proj-quizapp-backend.herokuapp.com/" target="_blank" rel="noreferrer" title="Backend Side" ><img src='https://pbs.twimg.com/profile_images/700084762799550464/dbPz0Wiw_400x400.png' className={classes.icons} alt="Backend"></img></a>
               </Typography>
           </Toolbar>
       </AppBar>
