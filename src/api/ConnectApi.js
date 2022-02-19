@@ -1,27 +1,21 @@
-import axios from 'axios'
+import axios from "axios";
+import { useState, useEffect } from "react";
 
-import { useState, useEffect } from 'react'
+const ConnectApi = (url, pageNumber) => {
+  const [dataState, setDataState] = useState({ data: [] });
+  useEffect(() => {
+    const fetchDataFromApi = async () => {
+      try {
+        const response = await axios.get(url);
+        setDataState({ ...dataState, data: response.data });
+      } catch (e) {
+        console.log(e);
+        // setFetch({ ...fetch, isFetching: true });
+      }
+    };
+    fetchDataFromApi();
+  }, [pageNumber]);
+  return [dataState];
+};
 
-const ConnectApi = (url) => {
-    const [fetch, setFetch] = useState({isFetching: false})
-    const [dataState, setDataState] = useState({data: []})
-    const [apiurl] = useState(url)
-
-    useEffect(() => {
-        const fetchDataFromApi = async () => {
-            try {
-                setFetch({isFetching: true})
-                const response = await axios.get(apiurl)
-                setDataState({...dataState, data: response.data})
-            } catch (e) {
-                setFetch({...fetch, isFetching: true})
-            }
-        }
-        fetchDataFromApi();
-    }, [])
-    return [dataState]
-}
-export default ConnectApi   
-
-
-    
+export default ConnectApi;

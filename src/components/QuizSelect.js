@@ -55,9 +55,6 @@ const QuizSelect = () => {
   const classes = useStyles();
   const API_URL = "https://dj-proj-quizapp-backend.herokuapp.com/quiz/";
   const [dataState] = ConnectApi(API_URL);
-  console.log(dataState)
-  const category_names = dataState.data.flatMap((q) => q.name)
-  console.log(category_names);
   return (
     <React.Fragment>
       <Header />

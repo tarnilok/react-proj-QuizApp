@@ -54,12 +54,9 @@ const useStyles = makeStyles((theme) => ({
 
 const QuizTitle = () => {
     const classes = useStyles();
-    console.log("param:", useParams())
     const {category} = useParams()
-    console.log("c:", category)
     const API_URL = "https://dj-proj-quizapp-backend.herokuapp.com/quiz/" + category;
     const [dataState] = ConnectApi(API_URL);
-    console.log(dataState)
     return (
         <React.Fragment>
           <Header />
@@ -109,7 +106,7 @@ const QuizTitle = () => {
                         fullWidth
                         variant="outlined"
                         color="primary"
-                        href = {"" + category + "/" + q.title}
+                        href = {category + "/" + q.title}
                       >
                         Start Quiz
                       </Button>
