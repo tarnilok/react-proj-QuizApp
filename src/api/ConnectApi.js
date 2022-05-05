@@ -4,16 +4,17 @@ import { useState, useEffect } from "react";
 const ConnectApi = (url, pageNumber) => {
   const [dataState, setDataState] = useState({ data: [] });
   useEffect(() => {
-    const fetchDataFromApi = async () => {
+    async function fetchDataFromApi() {
       try {
         const response = await axios.get(url);
         setDataState({ ...dataState, data: response.data });
       } catch (e) {
         console.log(e);
       }
-    };
+    }
     fetchDataFromApi();
-  }, [pageNumber, url, dataState]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber]);
   return [dataState];
 };
 
