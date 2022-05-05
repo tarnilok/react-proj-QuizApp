@@ -10,11 +10,10 @@ const ConnectApi = (url, pageNumber) => {
         setDataState({ ...dataState, data: response.data });
       } catch (e) {
         console.log(e);
-        // setFetch({ ...fetch, isFetching: true });
       }
     };
     fetchDataFromApi();
-  }, [pageNumber]);
+  }, [pageNumber, url, dataState]);
   return [dataState];
 };
 
